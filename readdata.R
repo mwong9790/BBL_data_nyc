@@ -1,4 +1,4 @@
-setwd("/Users/miawong/Desktop/Avigail_Data")
+setwd("/Users/miawong/Desktop/BBL_Data")
 hviol=read.csv("Housing_Maintenance_Code_Violations2014.csv")
 stable=read.csv("stabilized.csv")
 plutoMN=read.csv("MN.csv")
