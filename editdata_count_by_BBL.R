@@ -1,9 +1,20 @@
+#read data
+setwd("/Users/miawong/Desktop/Avigail_Data")
+hviol=read.csv("Housing_Maintenance_Code_Violations2014.csv")
+stable=read.csv("stabilized.csv")
+plutoMN=read.csv("MN.csv")
+plutoBX=read.csv("BX.csv")
+plutoBK=read.csv("BK.csv")
+plutoQN=read.csv("QN.csv")
+plutoSI=read.csv("SI.csv")
+pluto <- rbind(plutoBK,plutoBX,plutoMN,plutoQN,plutoSI)
+
 #install packages
 install.packages("dplyr")
 library(dplyr)
 
-#cutting down pluto dataset columns
-pluto_short <- subset(pluto,select=c(Borough, Block, Lot, CT2010, YearBuilt, UnitsRes))
+#only residential units & cutting down pluto dataset columns
+pluto_short <- subset(pluto,UnitsRes >0,select=c(Borough, Block, Lot, CT2010, CB2010, YearBuilt, UnitsRes))
 
 #creating BBL ID
 index <- c("MN", "BX", "BK", "QN", "SI")
@@ -35,7 +46,7 @@ pluto_bbl_data <- merge(x = pluto_w_viol, y = bblstable, by=c("BBL"), all.x = TR
 pluto_bbl_data$X2014uc[is.na(pluto_bbl_data$X2014uc)] <- 0
 
 #renaming & reorganizing
-pluto_bbl_short <- subset(pluto_bbl_data,select=c(BBL,CT2010,YearBuilt,UnitsRes,X2014uc,n))
+pluto_bbl_short <- subset(pluto_bbl_data,select=c(BBL,CT2010,CB2010,YearBuilt,UnitsRes,X2014uc,n))
 pluto_bbl_short <- pluto_bbl_short %>% rename(SUnits_by_bbl = X2014uc, HViol_by_bbl = n)
 
 #to export data
