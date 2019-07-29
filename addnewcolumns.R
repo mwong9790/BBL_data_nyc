@@ -4,8 +4,8 @@ install.packages("dplyr")
 library("dplyr")
 #import datasets
 pluto_bbl=read.csv("BBL_data_count_by_BBL.csv")
-race = read.csv("ACS_16_5YR_B02001_Race.csv")
-income = read.csv("ACS_16_5YR_B19013_median_income.csv")
+race = read.csv("ACS_14_5YR_B02001_Race.csv")
+income = read.csv("ACS_14_5YR_B19013_median_income.csv")
 nycha = read.csv("COLP_2018.csv")
 #edit race to have Borough, CensusTract, and Census Block Group values
 race$CT2010pt1 <- as.integer(substr(race$Id2,6,9))
